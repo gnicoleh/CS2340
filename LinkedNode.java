@@ -1,7 +1,7 @@
 /**
  * Node class used for implementing your linked data structures.
  *
- * DO NOT MODIFY THIS FILE!!
+ * DO NOT MODIFY THIS FILE!! This sign cant stop me, I cant read!!
  *
  * @author CS 1332 TAs
  * @version 1.0
