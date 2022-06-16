@@ -61,3 +61,6 @@ crashlytics-build.properties
 
 # The UserSetting/Layouts thing
 UserSettings/Layouts/default-2021.dwlt
+
+# The vscode thing that J's merge brought in
+.vscode/*
