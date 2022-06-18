@@ -11,20 +11,24 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
     [SerializeField] private float defaultVolume = 50f;
+    [SerializeField] private float volumeCount = 0f;
 
     [Header("Graphics Settings")]
     [SerializeField] private TMP_Text controllerSensitivityValue = null;
     [SerializeField] private Slider controllerSensitivitySlider = null;
     [SerializeField] private int defaultSensitivity = 4;
+    [SerializeField] private float sensitivityCount = 0f;
     public int mainSensitivityController = 4;
 
     [Space(10)]
     [SerializeField] private Slider brightnessSlider = null;
     [SerializeField] private TMP_Text brightnessValue = null;
     [SerializeField] private float defaultBrightness = 1;
+    [SerializeField] private float brightnessCount = 0;
 
     [Space(10)]
     [SerializeField] private Toggle fullScreenToggle;
+    [SerializeField] private bool fullscreenBool = false;
 
     
 
@@ -144,6 +148,37 @@ public class MainMenuController : MonoBehaviour
         }
     }
     /**
+     * This method keeps previous values
+     * 
+     * @param menuType whether it is for audio button or gameplay button
+     */
+    public void noButton(string menuType)
+    {
+        if (menuType == "Audio")
+        {
+            AudioListener.volume = volumeCount;
+            volumeSlider.value = volumeCount;
+            volumeTextValue.text = volumeCount.ToString("0");
+            volumeApply();
+        }
+
+        if (menuType == "Graphics")
+        {
+            //reset brightness vale
+            brightnessSlider.value = brightnessCount;
+            brightnessValue.text = brightnessCount.ToString("0.0");
+
+            fullScreenToggle.isOn = fullscreenBool;
+            Screen.fullScreen = fullscreenBool;
+
+            controllerSensitivityValue.text = sensitivityCount.ToString("0");
+            controllerSensitivitySlider.value = sensitivityCount;
+            mainSensitivityController = (int) sensitivityCount;
+
+            graphicsApply();
+        }
+    }
+    /**
      * This method is to create a simple color routine when we save/apply our changes from above.
      */
     public IEnumerator ConfirmationBox()
@@ -151,5 +186,22 @@ public class MainMenuController : MonoBehaviour
         confirmationPrompt.SetActive(true);
         yield return new WaitForSeconds(1); //show for two seconds
         confirmationPrompt.SetActive(false);
+    }
+    /**
+     * record the volume when the setting panel is opened
+     */
+    public void prevVolume()
+    {
+        volumeCount = volumeSlider.value;
+    }
+    /**
+     * record the volume when the setting panel is opened
+     */
+    public void prevGraphics()
+    {
+        sensitivityCount = controllerSensitivitySlider.value;
+        brightnessCount = brightnessSlider.value;
+        fullscreenBool = fullScreenToggle.isOn;
+
     }
 }
