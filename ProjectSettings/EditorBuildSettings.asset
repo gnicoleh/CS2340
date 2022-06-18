@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: d33c52bb98b90e347a6187fbab54aa87
+  - enabled: 1
+    path: Assets/Scenes/PegSolitaire.unity
+    guid: 3c49019890bad984497c9297f1e5d4e6
+  - enabled: 1
+    path: Assets/Scenes/EightPuzzle.unity
+    guid: 1193632865f79e842bf63f99c6245e73
+  - enabled: 1
+    path: Assets/Scenes/WarCard.unity
+    guid: dd596a74ff46c92458315d93147dd05d
   m_configObjects: {}
