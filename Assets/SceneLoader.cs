@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-// update the scene each loader
+
 public class SceneLoader : MonoBehaviour
 {
     public void loadScene(string sceneName)
