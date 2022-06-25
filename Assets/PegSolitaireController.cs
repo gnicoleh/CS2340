@@ -28,6 +28,7 @@ public class PegSolitaireController : MonoBehaviour
     void GameSetup()
     {
         pegsLeft = 32;
+
         for (int i = 0; i < 33; i++)
         {  
             pegPlaces[buttonsAvailable[i]].image.sprite = pegIcons[1];
