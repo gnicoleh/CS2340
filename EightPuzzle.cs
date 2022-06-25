@@ -106,7 +106,8 @@ public class Game : MonoBehaviour
             case GameState.End:
                 if (Input.GetMouseButtonUp(0))
                 {   //reload
-                    Application.LoadLevel(Application.loadedLevel);
+                    //Application.LoadLevel(Application.loadedLevel);
+                    // Should be SceneManagement.LoadScene() instead
                 }
                 break;
             default:
