@@ -19,6 +19,7 @@ public class PegSolitaireController : MonoBehaviour
     void GameSetup()
     {
         pegsLeft = 32;
+        // does not update 
         int[] buttonsAvailable = new int[] {25, 26, 27,
                                             36, 37, 38,
                                     45, 46, 47, 48, 49, 50, 51,
