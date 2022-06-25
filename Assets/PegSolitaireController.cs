@@ -73,7 +73,7 @@ public class PegSolitaireController : MonoBehaviour
                     userChoosedPair[1] = choice;
                     isValidMove(userChoosedPair);
                 } else {
-                    userChoosedPair = new int[2];
+                    userChoosedPair[0] = choice;
                 }
             }
     }
