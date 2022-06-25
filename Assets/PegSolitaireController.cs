@@ -128,8 +128,6 @@ public class PegSolitaireController : MonoBehaviour
         }
     }
 
-    
-    
     public void restartScene()
     {
         GameSetup();
