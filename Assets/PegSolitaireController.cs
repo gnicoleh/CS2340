@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+// does not update
 public class PegSolitaireController : MonoBehaviour
 {
     int[] buttonsAvailable = new int[] {25, 26, 27,
