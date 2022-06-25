@@ -28,7 +28,7 @@ public class MainMenuController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private Toggle fullScreenToggle;
-    [SerializeField] private bool fullscreenBool = false;
+    [SerializeField] private bool fullscreenBool = true;
 
     
 
@@ -137,8 +137,8 @@ public class MainMenuController : MonoBehaviour
             brightnessSlider.value = defaultBrightness;
             brightnessValue.text = defaultBrightness.ToString("0.0");
 
-            fullScreenToggle.isOn = false;
-            Screen.fullScreen = false;
+            fullScreenToggle.isOn = true;
+            Screen.fullScreen = true;
 
             controllerSensitivityValue.text = defaultSensitivity.ToString("0");
             controllerSensitivitySlider.value = defaultSensitivity;
