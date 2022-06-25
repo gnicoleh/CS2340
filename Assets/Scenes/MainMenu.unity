@@ -5162,6 +5162,7 @@ MonoBehaviour:
   brightnessCount: 0
   fullScreenToggle: {fileID: 1454866803}
   fullscreenBool: 0
+  AudioSource: {fileID: 0}
   confirmationPrompt: {fileID: 1217901905}
 --- !u!4 &803280895
 Transform:
