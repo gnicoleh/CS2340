@@ -34,10 +34,17 @@ public class MainMenuController : MonoBehaviour
 
     private bool isFullScreen;
     private float brightnessLevel;
+    public AudioSource AudioSource;
 
     [Header("Confirmation")]
     [SerializeField] private GameObject confirmationPrompt = null;
 
+    void start()
+    {
+        //AudioSource.Play();
+        volumeCount = PlayerPrefs.GetFloat("masterVolume");
+    }
+    
     /**
      * This method applies the exit button.
      */
@@ -46,7 +53,7 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-
+    
     /**
      * This method is to control the audio volume level.
      * AudioListener changes every single audio in the game. AudioListener has a value
