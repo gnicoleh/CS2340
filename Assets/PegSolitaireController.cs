@@ -18,7 +18,10 @@ public class PegSolitaireController : MonoBehaviour
     public Sprite[] pegIcons;
     public int[] userChoosedPair = new int[2];
     public int pegsLeft;
+    public int movesAvailable;
     public TMP_Text pegsLeftText;
+    public GameObject gameOverPopout;
+    public TMP_Text gameOverTitle;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +79,7 @@ public class PegSolitaireController : MonoBehaviour
     }
     public void isValidMove(int[] userInput)
     {
+        bool flag = false;
         // if user has made full choice
         if (userInput.Length == 2)
         {
@@ -85,6 +89,7 @@ public class PegSolitaireController : MonoBehaviour
             if (from - to == -2 && pegPlaces[from + 1].image.sprite == pegIcons[1])
             {
                 Debug.Log("Valid east move.");
+                flag = true;
                 pegPlaces[from + 1].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
                 pegPlaces[to].image.sprite = pegIcons[1];
@@ -95,6 +100,7 @@ public class PegSolitaireController : MonoBehaviour
             else if (from - to == 2 && pegPlaces[from - 1].image.sprite == pegIcons[1])
             {
                 Debug.Log("Valid west move.");
+                flag = true;
                 pegPlaces[from - 1].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
                 pegPlaces[to].image.sprite = pegIcons[1];
@@ -105,6 +111,7 @@ public class PegSolitaireController : MonoBehaviour
             else if (from - to == 22 && pegPlaces[from - 11].image.sprite == pegIcons[1])
             {
                 Debug.Log("Valid north move.");
+                flag = true;
                 pegPlaces[from - 11].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
                 pegPlaces[to].image.sprite = pegIcons[1];
@@ -115,6 +122,7 @@ public class PegSolitaireController : MonoBehaviour
             else if (from - to == -22 && pegPlaces[from + 11].image.sprite == pegIcons[1])
             {
                 Debug.Log("Valid south move.");
+                flag = true;
                 pegPlaces[from + 11].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
                 pegPlaces[to].image.sprite = pegIcons[1];
@@ -122,6 +130,79 @@ public class PegSolitaireController : MonoBehaviour
                 pegsLeftText.text = pegsLeft.ToString();
             }
             userChoosedPair = new int[2];
+        }
+        if (flag == true)
+        {
+            checkGameEnd(pegsLeft, buttonsAvailable);
+        }
+    }
+
+    public void checkGameEnd(int pegsLeft, int[] buttonsAvailable) 
+    {
+        Debug.Log("checking for game end.");
+        if (pegsLeft == 1)
+        {
+            Debug.Log("game done!");
+
+        }
+        movesAvailable = 0;
+        if (pegsLeft <= 17)
+        {
+            for (int i = 0; i < buttonsAvailable.Length; i++)
+            {
+                if (pegPlaces[buttonsAvailable[i]].image.sprite == pegIcons[1])
+                {
+                    if (pegPlaces[buttonsAvailable[i] + 1] != null && pegPlaces[buttonsAvailable[i] + 2] != null)
+                    {
+                        if (pegPlaces[buttonsAvailable[i] + 1].image.sprite == pegIcons[1] && pegPlaces[buttonsAvailable[i] + 2].image.sprite == pegIcons[0])
+                        {
+                            movesAvailable += 1;
+                        }
+                    }
+                    if (pegPlaces[buttonsAvailable[i] - 1] != null && pegPlaces[buttonsAvailable[i] - 2] != null)    
+                    {    
+                        if (pegPlaces[buttonsAvailable[i] - 1].image.sprite == pegIcons[1] && pegPlaces[buttonsAvailable[i] - 2].image.sprite == pegIcons[0])
+                        {
+                            movesAvailable += 1;
+                        }
+                    }
+                    if (pegPlaces[buttonsAvailable[i] + 11] != null && pegPlaces[buttonsAvailable[i] + 22] != null)
+                    {    
+                        if (pegPlaces[buttonsAvailable[i] + 11].image.sprite == pegIcons[1] && pegPlaces[buttonsAvailable[i] + 22].image.sprite == pegIcons[0])
+                        {
+                            movesAvailable += 1;
+                        }
+                    }
+                    if (pegPlaces[buttonsAvailable[i] - 11] != null && pegPlaces[buttonsAvailable[i] - 22] != null)
+                    {    
+                        if (pegPlaces[buttonsAvailable[i] - 11].image.sprite == pegIcons[1] && pegPlaces[buttonsAvailable[i] - 22].image.sprite == pegIcons[0])
+                        {
+                            movesAvailable += 1;
+                        }
+                    }
+                }
+            }
+            if (movesAvailable == 0)
+            {
+                Debug.Log("game over.");
+                showGameOverPopout();
+            }
+        }
+    }
+
+    public void showGameOverPopout() {
+        for (int i = 0; i < 33; i++)
+        {
+            pegPlaces[buttonsAvailable[i]].interactable = false;
+        }
+        if (pegsLeft == 1)
+        {  
+            gameOverTitle.text = "You Win!";
+            gameOverPopout.SetActive(true);
+        } else
+        {
+            gameOverTitle.text = "Game Over";
+            gameOverPopout.SetActive(true);
         }
     }
 
