@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+// does not update
 public class PegSolitaireController : MonoBehaviour
 {
+    // note that buttons available does not update but pegplaces does
+    // peg places is a null filled array with corresponding entries for buttonsavailble
     int[] buttonsAvailable = new int[] {25, 26, 27,
                                         36, 37, 38,
                                 45, 46, 47, 48, 49, 50, 51,
@@ -31,6 +33,7 @@ public class PegSolitaireController : MonoBehaviour
     void GameSetup()
     {
         pegsLeft = 32;
+
         for (int i = 0; i < 33; i++)
         {  
             pegPlaces[buttonsAvailable[i]].image.sprite = pegIcons[1];
