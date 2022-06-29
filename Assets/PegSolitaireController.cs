@@ -33,6 +33,7 @@ public class PegSolitaireController : MonoBehaviour
     void GameSetup()
     {
         pegsLeft = 32;
+        pegsLeftText.text = pegsLeft.ToString();
 
         for (int i = 0; i < 33; i++)
         {  
@@ -143,11 +144,6 @@ public class PegSolitaireController : MonoBehaviour
     public void checkGameEnd(int pegsLeft, int[] buttonsAvailable) 
     {
         Debug.Log("checking for game end.");
-        if (pegsLeft == 1)
-        {
-            Debug.Log("game done!");
-
-        }
         movesAvailable = 0;
         if (pegsLeft <= 17)
         {
