@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 163605431}
   - component: {fileID: 163605432}
   - component: {fileID: 163605433}
+  - component: {fileID: 163605434}
   m_Layer: 0
   m_Name: tile 6
   m_TagString: Untagged
@@ -234,6 +235,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &163605434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163605430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 6
 --- !u!1 &184349827
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,8 +327,9 @@ GameObject:
   - component: {fileID: 241596276}
   - component: {fileID: 241596277}
   - component: {fileID: 241596278}
+  - component: {fileID: 241596279}
   m_Layer: 0
-  m_Name: tile
+  m_Name: tile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,7 +419,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2, y: 2.27}
+    oldSize: {x: 2.2, y: 2.2}
     newSize: {x: 2.25, y: 2.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -412,6 +428,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &241596279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241596275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 1
 --- !u!1 &255459793
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +517,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySpace: {fileID: 1763695267}
+  tiles:
+  - {fileID: 241596279}
+  - {fileID: 1735669884}
+  - {fileID: 1472615915}
+  - {fileID: 752242555}
+  - {fileID: 1992373654}
+  - {fileID: 163605434}
+  - {fileID: 926804033}
+  - {fileID: 1632896710}
+  - {fileID: 0}
 --- !u!81 &255459796
 AudioListener:
   m_ObjectHideFlags: 0
@@ -623,6 +663,7 @@ GameObject:
   - component: {fileID: 752242552}
   - component: {fileID: 752242553}
   - component: {fileID: 752242554}
+  - component: {fileID: 752242555}
   m_Layer: 0
   m_Name: tile 4
   m_TagString: Untagged
@@ -723,6 +764,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &752242555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752242551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 4
 --- !u!1 &853157142
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +873,7 @@ GameObject:
   - component: {fileID: 926804030}
   - component: {fileID: 926804031}
   - component: {fileID: 926804032}
+  - component: {fileID: 926804033}
   m_Layer: 0
   m_Name: tile 7
   m_TagString: Untagged
@@ -918,6 +974,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &926804033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926804029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 7
 --- !u!1 &1275966082
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +1039,7 @@ GameObject:
   - component: {fileID: 1472615912}
   - component: {fileID: 1472615913}
   - component: {fileID: 1472615914}
+  - component: {fileID: 1472615915}
   m_Layer: 0
   m_Name: tile 3
   m_TagString: Untagged
@@ -1060,7 +1131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2, y: 2.21}
+    oldSize: {x: 2.2, y: 2.2}
     newSize: {x: 2.25, y: 2.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1069,6 +1140,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &1472615915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472615911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 3
 --- !u!1 &1632896706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1165,7 @@ GameObject:
   - component: {fileID: 1632896707}
   - component: {fileID: 1632896708}
   - component: {fileID: 1632896709}
+  - component: {fileID: 1632896710}
   m_Layer: 0
   m_Name: tile 8
   m_TagString: Untagged
@@ -1180,6 +1266,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &1632896710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632896706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 8
 --- !u!1 &1735669880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1291,7 @@ GameObject:
   - component: {fileID: 1735669881}
   - component: {fileID: 1735669882}
   - component: {fileID: 1735669883}
+  - component: {fileID: 1735669884}
   m_Layer: 0
   m_Name: tile 2
   m_TagString: Untagged
@@ -1291,6 +1392,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &1735669884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735669880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 2
 --- !u!1 &1763695266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,7 +1416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1763695267}
   m_Layer: 0
-  m_Name: EmptySpace
+  m_Name: emptySpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1333,6 +1448,7 @@ GameObject:
   - component: {fileID: 1992373651}
   - component: {fileID: 1992373652}
   - component: {fileID: 1992373653}
+  - component: {fileID: 1992373654}
   m_Layer: 0
   m_Name: tile 5
   m_TagString: Untagged
@@ -1433,3 +1549,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &1992373654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992373650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e541ecb0d57014cb752c2b50bcabd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPostition: {x: 0, y: 0, z: 0}
+  number: 5
