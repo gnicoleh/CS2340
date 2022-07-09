@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EightPuzzleController : MonoBehaviour
 {
     [SerializeField] private Transform emptySpace = null;
-    private Camera _camera;
+    private Camera camera;
     [SerializeField] private TileScript[] tiles;
     private int emptySpaceIndex = 8;
+    public int correctTiles = 0;
+    public GameObject gameOverPopout;
+    public TMP_Text gameOverTitle;
+    private bool isFinished = false;
     // Start is called before the first frame update
     void Start()
     {
-        _camera = Camera.main;
+        camera = Camera.main;
         Shuffle();
     }
 
@@ -20,20 +26,50 @@ public class EightPuzzleController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit)
             {
-                if (Vector2.Distance(emptySpace.position, hit.transform.position) < 3)
+                if (Vector2.Distance(emptySpace.position, hit.transform.position) < 0.8)
                 {
-                    Vector2 lastEmptySpacePosition = emptySpace.position;
+                    Vector2 lastEmptySapcePosition = emptySpace.position;
                     TileScript thisTile = hit.transform.GetComponent<TileScript>();
-                    emptySpace.position = thisTile.targetPostition;
-                    thisTile.targetPostition = lastEmptySpacePosition;
+                    emptySpace.position = thisTile.targetPosition;
+                    thisTile.targetPosition = lastEmptySapcePosition;
                     int tileIndex = findIndex(thisTile);
-                    tiles[emptySpaceIndex] = tiles[tileIndex];
+                    tiles[emptySpaceIndex] = tiles[tileIndex]; 
                     tiles[tileIndex] = null;
                     emptySpaceIndex = tileIndex;
+                }
+            }
+        }
+        int correctTiles = 0;
+        if (!isFinished)
+        {
+            foreach(var a in tiles)
+            {
+                if (a != null)
+                {
+                    if (a.inRightPlace)
+                    {
+                        correctTiles += 1;
+                    }
+                }
+            }
+            if (correctTiles == tiles.Length - 1)
+            {
+                Debug.Log("you won");
+                for (int i = 0; i < tiles.Length; i++)
+                {
+                    if (tiles[i] != null)
+                    {
+                        tiles[i].GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                }
+                isFinished = true;
+                if (isFinished == true)
+                {
+                    showGameOverPopout();
                 }
             }
         }
@@ -43,8 +79,8 @@ public class EightPuzzleController : MonoBehaviour
     {
         if (emptySpaceIndex != 8)
         {
-            var tileOn8LastPos = tiles[8].targetPostition;
-            tiles[8].targetPostition = emptySpace.position;
+            var tileOn8LastPos = tiles[8].targetPosition;
+            tiles[8].targetPosition = emptySpace.position;
             emptySpace.position = tileOn8LastPos;
             tiles[emptySpaceIndex] = tiles[8];
             tiles[8] = null;
@@ -55,17 +91,17 @@ public class EightPuzzleController : MonoBehaviour
         {
             for (int i = 0; i < 8; i++)
             {
-                var lastPos = tiles[i].targetPostition;
-                int randomIndex = Random.Range(0,8);
-                tiles[i].targetPostition = tiles[randomIndex].targetPostition;
-                tiles[randomIndex].targetPostition = lastPos;
+                var lastPos = tiles[i].targetPosition;
+                int randomIndex = Random.Range(0, 7);
+                tiles[i].targetPosition = tiles[randomIndex].targetPosition;
+                tiles[randomIndex].targetPosition = lastPos;
                 var tile = tiles[i];
                 tiles[i] = tiles[randomIndex];
                 tiles[randomIndex] = tile;
             }
             inversion = GetInversions();
-            Debug.Log("");
-        } while (inversion % 2 == 0);
+            Debug.Log("Shuffled.");
+        } while (inversion % 2 != 0);
     }
 
     public int findIndex(TileScript ts)
@@ -80,28 +116,42 @@ public class EightPuzzleController : MonoBehaviour
                 }
             }
         }
-        
         return -1;
     }
 
-    int GetInversions()
+    public int GetInversions()
     {
-        int inversionSum = 0;
+        int inversionsSum = 0;
         for (int i = 0; i < tiles.Length; i++)
         {
-            int thisTileInvertion = 0;
+            int thisTileInversion = 0;
             for (int j = 0; j < tiles.Length; j++)
             {
-                if (tiles[j] != null)
+                if (tiles[i] != null && tiles[j] != null)
                 {
                     if (tiles[i].number > tiles[j].number)
                     {
-                        thisTileInvertion++;
+                        thisTileInversion += 1;
                     }
                 }
             }
-            inversionSum += thisTileInvertion;
+            inversionsSum += thisTileInversion;
         }
-        return inversionSum;
+        return inversionsSum;
+    }
+
+    public void showGameOverPopout() {
+        gameOverTitle.text = "You Won!";
+        gameOverPopout.SetActive(true);
+    }
+
+    public void restartScene()
+    {
+        Start();
+    }
+
+    public void sceneSwitcher()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

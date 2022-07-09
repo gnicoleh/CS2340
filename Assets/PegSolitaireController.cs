@@ -92,7 +92,6 @@ public class PegSolitaireController : MonoBehaviour
             // check if it is valid east move
             if (from - to == -2 && pegPlaces[from + 1].image.sprite == pegIcons[1])
             {
-                Debug.Log("Valid east move.");
                 flag = true;
                 pegPlaces[from + 1].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
@@ -103,7 +102,6 @@ public class PegSolitaireController : MonoBehaviour
             // check if it is valid west move
             else if (from - to == 2 && pegPlaces[from - 1].image.sprite == pegIcons[1])
             {
-                Debug.Log("Valid west move.");
                 flag = true;
                 pegPlaces[from - 1].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
@@ -114,7 +112,6 @@ public class PegSolitaireController : MonoBehaviour
             // check if it is valid north move
             else if (from - to == 22 && pegPlaces[from - 11].image.sprite == pegIcons[1])
             {
-                Debug.Log("Valid north move.");
                 flag = true;
                 pegPlaces[from - 11].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
@@ -125,7 +122,6 @@ public class PegSolitaireController : MonoBehaviour
             // check if it is valid south move
             else if (from - to == -22 && pegPlaces[from + 11].image.sprite == pegIcons[1])
             {
-                Debug.Log("Valid south move.");
                 flag = true;
                 pegPlaces[from + 11].image.sprite = pegIcons[0];
                 pegPlaces[from].image.sprite = pegIcons[0];
@@ -143,7 +139,6 @@ public class PegSolitaireController : MonoBehaviour
 
     public void checkGameEnd(int pegsLeft, int[] buttonsAvailable) 
     {
-        Debug.Log("checking for game end.");
         movesAvailable = 0;
         if (pegsLeft <= 17)
         {
@@ -183,7 +178,6 @@ public class PegSolitaireController : MonoBehaviour
             }
             if (movesAvailable == 0)
             {
-                Debug.Log("game over.");
                 showGameOverPopout();
             }
         }
@@ -196,7 +190,7 @@ public class PegSolitaireController : MonoBehaviour
         }
         if (pegsLeft == 1)
         {  
-            gameOverTitle.text = "You Win!";
+            gameOverTitle.text = "You Won!";
             gameOverPopout.SetActive(true);
         } else
         {
