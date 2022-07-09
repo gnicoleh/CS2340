@@ -18,6 +18,13 @@ public class EightPuzzleController : MonoBehaviour
     void Start()
     {
         camera = Camera.main;
+        for (int i = 0; i < tiles.Length; i++)
+                {
+                    if (tiles[i] != null)
+                    {
+                        tiles[i].GetComponent<BoxCollider2D>().enabled = true;
+                    }
+                }
         Shuffle();
     }
 
