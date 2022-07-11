@@ -18,13 +18,7 @@ public class EightPuzzleController : MonoBehaviour
     void Start()
     {
         camera = Camera.main;
-        for (int i = 0; i < tiles.Length; i++)
-                {
-                    if (tiles[i] != null)
-                    {
-                        tiles[i].GetComponent<BoxCollider2D>().enabled = true;
-                    }
-                }
+        enableTile();
         Shuffle();
     }
 
@@ -66,13 +60,7 @@ public class EightPuzzleController : MonoBehaviour
             if (correctTiles == tiles.Length - 1)
             {
                 Debug.Log("you won");
-                for (int i = 0; i < tiles.Length; i++)
-                {
-                    if (tiles[i] != null)
-                    {
-                        tiles[i].GetComponent<BoxCollider2D>().enabled = false;
-                    }
-                }
+                disableTile();
                 isFinished = true;
                 if (isFinished == true)
                 {
@@ -107,6 +95,7 @@ public class EightPuzzleController : MonoBehaviour
                 tiles[randomIndex] = tile;
             }
             inversion = GetInversions();
+            Debug.Log(inversion +"inversions.");
             Debug.Log("Shuffled.");
         } while (inversion % 2 != 0);
     }
@@ -131,18 +120,22 @@ public class EightPuzzleController : MonoBehaviour
         int inversionsSum = 0;
         for (int i = 0; i < tiles.Length; i++)
         {
-            int thisTileInversion = 0;
-            for (int j = 0; j < tiles.Length; j++)
-            {
-                if (tiles[i] != null && tiles[j] != null)
+            if (tiles[i] != null)
+            {    
+                int thisTileInversion = 0;
+                for (int j = i; j < tiles.Length; j++)
                 {
-                    if (tiles[i].number > tiles[j].number)
+                    if (tiles[j] != null)
                     {
-                        thisTileInversion += 1;
+                        if (tiles[i].number > tiles[j].number)
+                        {
+                            Debug.Log(tiles[i] + " is bigger than " + tiles[j]);
+                            thisTileInversion += 1;
+                        }
                     }
                 }
+                inversionsSum += thisTileInversion;
             }
-            inversionsSum += thisTileInversion;
         }
         return inversionsSum;
     }
@@ -150,6 +143,26 @@ public class EightPuzzleController : MonoBehaviour
     public void showGameOverPopout() {
         gameOverTitle.text = "You Won!";
         gameOverPopout.SetActive(true);
+    }
+
+    public void enableTile() {
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i] != null)
+            {
+                tiles[i].GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+    }
+
+    public void disableTile() {
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i] != null)
+            {
+                tiles[i].GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
     }
 
     public void restartScene()
