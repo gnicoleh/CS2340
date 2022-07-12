@@ -33,7 +33,7 @@ public class EightPuzzleController : MonoBehaviour
             {
                 if (Vector2.Distance(emptySpace.position, hit.transform.position) < 0.8)
                 {
-                    Vector2 lastEmptySapcePosition = emptySpace.position;
+                    Vector3 lastEmptySapcePosition = new Vector3(emptySpace.position.x, emptySpace.position.y, 0);
                     TileScript thisTile = hit.transform.GetComponent<TileScript>();
                     emptySpace.position = thisTile.targetPosition;
                     thisTile.targetPosition = lastEmptySapcePosition;
