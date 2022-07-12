@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class EightPuzzleController : MonoBehaviour
@@ -14,10 +15,17 @@ public class EightPuzzleController : MonoBehaviour
     public GameObject gameOverPopout;
     public TMP_Text gameOverTitle;
     private bool isFinished = false;
+
+
+    [SerializeField] private Button restartBtn;
+    [SerializeField] private Button howToBtn;
+    [SerializeField] private Button mainMenuBtn;
+
     // Start is called before the first frame update
     void Start()
     {
         camera = Camera.main;
+        enableTile();
         Shuffle();
     }
 
@@ -37,7 +45,7 @@ public class EightPuzzleController : MonoBehaviour
                     emptySpace.position = thisTile.targetPosition;
                     thisTile.targetPosition = lastEmptySapcePosition;
                     int tileIndex = findIndex(thisTile);
-                    tiles[emptySpaceIndex] = tiles[tileIndex]; 
+                    tiles[emptySpaceIndex] = tiles[tileIndex];
                     tiles[tileIndex] = null;
                     emptySpaceIndex = tileIndex;
                 }
@@ -46,7 +54,7 @@ public class EightPuzzleController : MonoBehaviour
         int correctTiles = 0;
         if (!isFinished)
         {
-            foreach(var a in tiles)
+            foreach (var a in tiles)
             {
                 if (a != null)
                 {
@@ -58,14 +66,7 @@ public class EightPuzzleController : MonoBehaviour
             }
             if (correctTiles == tiles.Length - 1)
             {
-                Debug.Log("you won");
-                for (int i = 0; i < tiles.Length; i++)
-                {
-                    if (tiles[i] != null)
-                    {
-                        tiles[i].GetComponent<BoxCollider2D>().enabled = false;
-                    }
-                }
+                disableTile();
                 isFinished = true;
                 if (isFinished == true)
                 {
@@ -100,7 +101,6 @@ public class EightPuzzleController : MonoBehaviour
                 tiles[randomIndex] = tile;
             }
             inversion = GetInversions();
-            Debug.Log("Shuffled.");
         } while (inversion % 2 != 0);
     }
 
@@ -124,26 +124,87 @@ public class EightPuzzleController : MonoBehaviour
         int inversionsSum = 0;
         for (int i = 0; i < tiles.Length; i++)
         {
-            int thisTileInversion = 0;
-            for (int j = 0; j < tiles.Length; j++)
+            if (tiles[i] != null)
             {
-                if (tiles[i] != null && tiles[j] != null)
+                int thisTileInversion = 0;
+                for (int j = i; j < tiles.Length; j++)
                 {
-                    if (tiles[i].number > tiles[j].number)
+                    if (tiles[j] != null)
                     {
-                        thisTileInversion += 1;
+                        if (tiles[i].number > tiles[j].number)
+                        {
+                            thisTileInversion += 1;
+                        }
                     }
                 }
+                inversionsSum += thisTileInversion;
             }
-            inversionsSum += thisTileInversion;
         }
         return inversionsSum;
     }
 
-    public void showGameOverPopout() {
-        gameOverTitle.text = "You Won!";
+    public void showGameOverPopout()
+    {
+        //gameOverTitle.text = "You Won!";
         gameOverPopout.SetActive(true);
     }
+
+    public void enableTile()
+    {
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i] != null)
+            {
+                tiles[i].GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+    }
+
+    public void disableTile()
+    {
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i] != null)
+            {
+                tiles[i].GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
+    }
+
+    public void disableForRestartBtn()
+    {
+        howToBtn.interactable = false;
+        mainMenuBtn.interactable = false;
+    }
+
+    public void enableForRestartBtn()
+    {
+        howToBtn.interactable = true;
+        mainMenuBtn.interactable = true;
+    }
+
+    public void disableForHowToBtn()
+    {
+        restartBtn.interactable = false;
+        mainMenuBtn.interactable = false;
+    }
+    public void enableForHowToBtn()
+    {
+        restartBtn.interactable = true;
+        mainMenuBtn.interactable = true;
+    }
+
+    public void disableForMainMenuBtn()
+    {
+        howToBtn.interactable = false;
+        restartBtn.interactable = false;
+    }
+    public void enableForMainMenuBtn()
+    {
+        howToBtn.interactable = true;
+        restartBtn.interactable = true;
+    }
+
 
     public void restartScene()
     {
