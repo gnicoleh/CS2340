@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -209,10 +208,5 @@ public class EightPuzzleController : MonoBehaviour
     public void restartScene()
     {
         Start();
-    }
-
-    public void sceneSwitcher()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 }
