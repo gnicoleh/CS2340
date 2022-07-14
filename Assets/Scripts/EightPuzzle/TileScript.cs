@@ -23,12 +23,12 @@ public class TileScript : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, 0.05f);
         if (targetPosition == correctPosition)
         {
-            sprite.color = Color.green;
+            sprite.color = Color.white;
             inRightPlace = true;
         }
         else
         {
-            sprite.color = Color.white;
+            sprite.color = Color.grey;
             inRightPlace = false;
         }
     }

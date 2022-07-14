@@ -30,7 +30,7 @@ public class EightPuzzleController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit)
             {
-                if (Vector2.Distance(emptySpace.position, hit.transform.position) < 0.8)
+                if (Vector2.Distance(emptySpace.position, hit.transform.position) < 1.1)
                 {
                     Vector2 lastEmptySapcePosition = emptySpace.position;
                     TileScript thisTile = hit.transform.GetComponent<TileScript>();
