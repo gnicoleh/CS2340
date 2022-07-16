@@ -7,14 +7,15 @@ using TMPro;
 public class RockPaperScissorsController : MonoBehaviour
 {
     [Header("AI Prompt")]
-    public TMP_Text result;
+    [SerializeField] private TMP_Text result;
     public Image aiChoice;
 
     [Header("Choices")]
     public string[] choices;
-    public Sprite Rock;
-    public Sprite Paper;
-    public Sprite Scissors;
+    [SerializeField] private Sprite Rock;
+    [SerializeField] private Sprite Paper;
+    [SerializeField] private Sprite Scissors;
+
 
     public void Play(string myChoice)
     {
@@ -68,5 +69,10 @@ public class RockPaperScissorsController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public TMP_Text getResult()
+    {
+        return result;
     }
 }
