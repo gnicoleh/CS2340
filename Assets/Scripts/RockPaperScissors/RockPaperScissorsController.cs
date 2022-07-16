@@ -16,6 +16,7 @@ public class RockPaperScissorsController : MonoBehaviour
     [SerializeField] private Sprite Paper;
     [SerializeField] private Sprite Scissors;
 
+
     public void Play(string myChoice)
     {
         string randomAIChoice = choices[Random.Range(0, choices.Length)];
