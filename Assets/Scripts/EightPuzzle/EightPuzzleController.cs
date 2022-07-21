@@ -24,6 +24,7 @@ public class EightPuzzleController : MonoBehaviour
     void Start()
     {
         camera = Camera.main;
+        isFinished = false;
         enableTile();
         Shuffle();
     }
@@ -72,6 +73,9 @@ public class EightPuzzleController : MonoBehaviour
                     showGameOverPopout();
                 }
             }
+        } else
+        {
+            disableTile();
         }
     }
 
