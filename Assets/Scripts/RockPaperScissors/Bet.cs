@@ -7,27 +7,25 @@ using TMPro;
 public class Bet : MonoBehaviour
 {
     [Header("Slider")]
+    [SerializeField] private Button betButton;
     [SerializeField] private Slider betSlider = null;
     [SerializeField] private TMP_Text betTextValue = null;
     [SerializeField] private int defaultBet = 3;
-    private int playerBetValue = 0;
+    public int playerBetValue = 0;
 
     [Header("Player Cards Left")]
     [SerializeField] private TMP_Text playerCardLeft = null;
-    private float playerCardCount = 25;
+    public float playerCardCount = 25;
 
     [Header("AI Cards Left")]
     [SerializeField] private TMP_Text aiBetValueText = null;
     [SerializeField] private TMP_Text aiCardLeft = null;
-    private int aiBetValue = 0;
-    private float aiCardCount = 25;
-    
-
+    public int aiBetValue = 0;
+    public float aiCardCount = 25;
 
     
+    public bool betFlag = false;
     private int defaultCard = 25;
-
-
 
     public void setBet(float bet)
     {
@@ -40,8 +38,16 @@ public class Bet : MonoBehaviour
      */
     public void applyPlayerBet()
     {
-        playerCardCount -= playerBetValue;
-        playerCardLeft.text = playerCardCount.ToString();
+        if (betFlag == false && playerBetValue <= playerCardCount)
+        {
+            playerCardCount -= playerBetValue;
+            cardsRemainingTextupdate();
+            betFlag = true;
+        }
+        else
+        {
+            Debug.Log("The bet is already made.");
+        }
     }
 
     public void applyAIBet()
@@ -66,19 +72,7 @@ public class Bet : MonoBehaviour
         aiCardCount -= aiBetValue;
 
         aiBetValueText.text = aiBetValue.ToString();
-        aiCardLeft.text = aiCardCount.ToString();
-    }
-
-    public void endGame()
-    {
-        if(playerCardCount == 0)
-        {
-
-        }
-        else if(aiCardCount == 0)
-        {
-
-        }
+        cardsRemainingTextupdate();
     }
 
     public void resetBtn(string order)
@@ -90,5 +84,11 @@ public class Bet : MonoBehaviour
             playerCardCount = defaultCard;
             aiCardCount = defaultCard;
         }
+    }
+
+    public void cardsRemainingTextupdate()
+    {
+        playerCardLeft.text = playerCardCount.ToString();
+        aiCardLeft.text = aiCardCount.ToString();
     }
 }

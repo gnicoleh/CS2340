@@ -46,11 +46,6 @@ public class PegSolitaireController : MonoBehaviour
         }
         //pegPlaces[59].image.sprite = pegIcons[0];
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void makeUserChoicePair(int choice)
     {

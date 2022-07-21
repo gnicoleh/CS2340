@@ -3155,7 +3155,7 @@ GameObject:
   - component: {fileID: 1389481261}
   - component: {fileID: 1389481260}
   m_Layer: 5
-  m_Name: AIBet
+  m_Name: AIBetText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3781,6 +3781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc170e42c87a034f928a10021101b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  betScript: {fileID: 1907970498}
   result: {fileID: 1430819545}
   aiChoice: {fileID: 1662235867}
   choices:
@@ -4677,12 +4678,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c8cb0157118964b92c3121ea83ce7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  betButton: {fileID: 722030735}
   betSlider: {fileID: 1679573245}
   betTextValue: {fileID: 1438813069}
   defaultBet: 2
+  playerBetValue: 0
   playerCardLeft: {fileID: 860594774}
+  playerCardCount: 25
   aiBetValueText: {fileID: 1116980448}
   aiCardLeft: {fileID: 1998287099}
+  aiBetValue: 0
+  aiCardCount: 25
+  betFlag: 0
 --- !u!4 &1907970499
 Transform:
   m_ObjectHideFlags: 0
