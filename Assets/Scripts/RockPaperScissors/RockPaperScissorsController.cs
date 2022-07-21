@@ -17,14 +17,22 @@ public class RockPaperScissorsController : MonoBehaviour
     [SerializeField] private Sprite Paper;
     [SerializeField] private Sprite Scissors;
 
+    [Header("Player Cards Left")]
+    [SerializeField] private TMP_Text playerCardLeft = null;
+
+    [Header("AI Cards Left")]
+    [SerializeField] private TMP_Text aiCardLeft = null;
+
+    [Header("Warning")]
+    [SerializeField] private GameObject placeBetWarning = null;
 
     public void Play(string myChoice)
     {
         if (betScript.betFlag == true)
         {
             Debug.Log("total bet is " + betScript.playerBetValue + betScript.aiBetValue);
+            
             string randomAIChoice = choices[Random.Range(0, choices.Length)];
-
             switch (randomAIChoice)
             {
                 case "Rock":
@@ -94,23 +102,50 @@ public class RockPaperScissorsController : MonoBehaviour
         }
         else
         {
+            StartCoroutine(warningScreen());
             Debug.Log("Bet has not made yet.");
         }
     }
 
     public void checkEndGame()
+    {
+        if(betScript.playerCardCount <= 0)
         {
-            if(betScript.playerCardCount <= 0)
-            {
-                Debug.Log("You Lose");
-            }
-            else if(betScript.aiCardCount <= 0)
-            {
-                Debug.Log("You Won!");
-            }
+            Debug.Log("You Lose");
         }
+        else if(betScript.aiCardCount <= 0)
+        {
+            Debug.Log("You Won!");
+        }
+    }
     public TMP_Text getResult()
     {
         return result;
+    }
+
+    public void recalculateCardLeft()
+    {
+        if (result.text == "You WIN!")
+        {
+            betScript.playerCardCount += betScript.aiBetValue;
+            playerCardLeft.text = betScript.playerCardCount.ToString();
+        } 
+        else if (result.text == "You LOST!")
+        {
+            betScript.aiCardCount += betScript.playerCardCount;
+            aiCardLeft.text = betScript.aiCardCount.ToString();
+        }
+        else
+        {
+            playerCardLeft.text = betScript.playerCardCount.ToString();
+            aiCardLeft.text = betScript.aiCardCount.ToString();
+        }
+    }
+
+    public IEnumerator warningScreen()
+    {
+        placeBetWarning.SetActive(true);
+        yield return new WaitForSeconds(1);
+        placeBetWarning.SetActive(false);
     }
 }

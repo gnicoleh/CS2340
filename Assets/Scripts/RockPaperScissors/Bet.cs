@@ -15,13 +15,13 @@ public class Bet : MonoBehaviour
 
     [Header("Player Cards Left")]
     [SerializeField] private TMP_Text playerCardLeft = null;
-    public float playerCardCount = 25;
+    public int playerCardCount = 25;
 
     [Header("AI Cards Left")]
     [SerializeField] private TMP_Text aiBetValueText = null;
     [SerializeField] private TMP_Text aiCardLeft = null;
     public int aiBetValue = 0;
-    public float aiCardCount = 25;
+    public int aiCardCount = 25;
 
     
     public bool betFlag = false;
@@ -52,23 +52,14 @@ public class Bet : MonoBehaviour
 
     public void applyAIBet()
     {
-        if (aiCardCount == 1)
+        
+        if (aiCardCount < 5)
         {
-            aiBetValue = 1;
-        } else if (aiCardCount == 2)
-        {
-            aiBetValue = Random.Range(1, 2);
-        } else if (aiCardCount == 3)
-        {
-            aiBetValue = Random.Range(1, 3);
-        } else if (aiCardCount == 4)
-        {
-            aiBetValue = Random.Range(1, 4);
+            aiBetValue = Random.Range(1, aiCardCount);
         } else
         {
             aiBetValue = Random.Range(1, 5);
         }
-
         aiCardCount -= aiBetValue;
 
         aiBetValueText.text = aiBetValue.ToString();

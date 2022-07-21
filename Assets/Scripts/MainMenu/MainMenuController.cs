@@ -191,7 +191,7 @@ public class MainMenuController : MonoBehaviour
     public IEnumerator ConfirmationBox()
     {
         confirmationPrompt.SetActive(true);
-        yield return new WaitForSeconds(1); //show for two seconds
+        yield return new WaitForSeconds(1); //show for one seconds
         confirmationPrompt.SetActive(false);
     }
     /**
