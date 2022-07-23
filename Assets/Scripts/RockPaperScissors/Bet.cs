@@ -10,22 +10,32 @@ public class Bet : MonoBehaviour
     [SerializeField] private Button betButton;
     [SerializeField] private Slider betSlider = null;
     [SerializeField] private TMP_Text betTextValue = null;
-    [SerializeField] private int defaultBet = 3;
+    [SerializeField] private int defaultBet;
     public int playerBetValue = 0;
+    public ButtonInteraction buttonInteraction;
 
     [Header("Player Cards Left")]
     [SerializeField] private TMP_Text playerCardLeft = null;
-    public float playerCardCount = 25;
+    public int playerCardCount = 10;
 
     [Header("AI Cards Left")]
     [SerializeField] private TMP_Text aiBetValueText = null;
     [SerializeField] private TMP_Text aiCardLeft = null;
+    [SerializeField] private Image aiImage;
+    [SerializeField] private Sprite QuestionMark;
     public int aiBetValue = 0;
-    public float aiCardCount = 25;
+    public int aiCardCount = 10;
 
+    [Header("Warning")]
+    [SerializeField] private GameObject decreaseBetWarning = null;
+
+    [Header("Result Text")]
+    [SerializeField] private TMP_Text resultText = null;
     
     public bool betFlag = false;
-    private int defaultCard = 25;
+    private int defaultCard = 10;
+    //private bool aiStopBet = false;
+
 
     public void setBet(float bet)
     {
@@ -38,6 +48,7 @@ public class Bet : MonoBehaviour
      */
     public void applyPlayerBet()
     {
+        
         if (betFlag == false && playerBetValue <= playerCardCount)
         {
             playerCardCount -= playerBetValue;
@@ -46,29 +57,32 @@ public class Bet : MonoBehaviour
         }
         else
         {
-            Debug.Log("The bet is already made.");
+            //aiStopBet = true;
+            betFlag = false;
+            betButton.interactable = true;
+            buttonInteraction.enableBetButton();
+            StartCoroutine(warningBet());
+            Debug.Log("INVALID bet.");
         }
+    }
+
+    public IEnumerator warningBet()
+    {
+        decreaseBetWarning.SetActive(true);
+        yield return new WaitForSeconds(1);
+        decreaseBetWarning.SetActive(false);
     }
 
     public void applyAIBet()
     {
-        if (aiCardCount == 1)
+        if (aiCardCount < 5)
         {
-            aiBetValue = 1;
-        } else if (aiCardCount == 2)
-        {
-            aiBetValue = Random.Range(1, 2);
-        } else if (aiCardCount == 3)
-        {
-            aiBetValue = Random.Range(1, 3);
-        } else if (aiCardCount == 4)
-        {
-            aiBetValue = Random.Range(1, 4);
-        } else
+            aiBetValue = Random.Range(1, aiCardCount);
+        }
+        else
         {
             aiBetValue = Random.Range(1, 5);
         }
-
         aiCardCount -= aiBetValue;
 
         aiBetValueText.text = aiBetValue.ToString();
@@ -82,7 +96,13 @@ public class Bet : MonoBehaviour
             betSlider.value = defaultBet;
             aiBetValue = defaultBet;
             playerCardCount = defaultCard;
+            playerCardLeft.text = playerCardCount.ToString();
             aiCardCount = defaultCard;
+            aiCardLeft.text = aiCardCount.ToString();
+            aiBetValueText.text = 3 + "";
+            resultText.text = "Results";
+            betButton.interactable = true;
+            aiImage.sprite = QuestionMark;
         }
     }
 
