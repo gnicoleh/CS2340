@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         bird = GetComponent<Rigidbody2D>();
+        score = 0;
+        scoreText.text = "0";
     }
 
     // Update is called once per frame
@@ -24,20 +26,12 @@ public class PlayerController : MonoBehaviour
         {
             bird.velocity = Vector2.up * velocity;
         }
-
-        // Commented out because it's implemented in GameManagerFB>Replay()
-        // if (Input.GetKeyDown("r"))  // v1
-        // {
-        //     SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);  // v1
-        // }
     }
 
     // v1 method
     private void OnCollisionEnter2D()
     {
         dead = true;
-        score = 0;
-        scoreText.text = "0";
         gameManagerFB.GameOver();
     }
 
