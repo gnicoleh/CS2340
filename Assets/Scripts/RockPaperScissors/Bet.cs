@@ -11,7 +11,7 @@ public class Bet : MonoBehaviour
     [SerializeField] private Slider betSlider = null;
     [SerializeField] private TMP_Text betTextValue = null;
     [SerializeField] private int defaultBet;
-    public int playerBetValue = 0;
+    public int playerBetValue = 3;
     public ButtonInteraction buttonInteraction;
 
     [Header("Player Cards Left")]
@@ -34,7 +34,6 @@ public class Bet : MonoBehaviour
     
     public bool betFlag = false;
     private int defaultCard = 10;
-    //private bool aiStopBet = false;
 
 
     public void setBet(float bet)
@@ -49,15 +48,16 @@ public class Bet : MonoBehaviour
     public void applyPlayerBet()
     {
         
-        if (betFlag == false && playerBetValue <= playerCardCount)
+        if (betFlag == false && playerBetValue <= playerCardCount && aiBetValue <= aiCardCount)
         {
+            buttonInteraction.disableBetButton();
             playerCardCount -= playerBetValue;
             cardsRemainingTextupdate();
             betFlag = true;
+            applyAIBet();
         }
-        else
+        else if (betFlag == false && playerBetValue > playerCardCount)
         {
-            //aiStopBet = true;
             betFlag = false;
             betButton.interactable = true;
             buttonInteraction.enableBetButton();

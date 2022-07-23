@@ -7,12 +7,14 @@ public class GameManagerFB : MonoBehaviour
 
     private void Start()
     {
+        gameOverCanvas.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void GameOver()
     {
         gameOverCanvas.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void Replay()

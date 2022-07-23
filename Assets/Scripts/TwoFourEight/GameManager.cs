@@ -218,6 +218,11 @@ public class GameManager : MonoBehaviour
     {
         return _nodes.FirstOrDefault(n => n.Pos == pos);
     }
+
+    public void restart()
+    {
+        Start();
+    }
 }
 
 [Serializable]
