@@ -7,6 +7,7 @@ using TMPro;
 public class RockPaperScissorsController : MonoBehaviour
 {
     public Bet betScript;
+
     [Header("AI Prompt")]
     [SerializeField] private TMP_Text result;
     public Image aiChoice;
@@ -26,11 +27,17 @@ public class RockPaperScissorsController : MonoBehaviour
     [Header("Warning")]
     [SerializeField] private GameObject placeBetWarning = null;
 
+    [Header("Game OVER")]
+    [SerializeField] private GameObject youLost = null;
+    [SerializeField] private GameObject youWon = null;
+
+
     public void Play(string myChoice)
     {
         if (betScript.betFlag == true)
         {
-            Debug.Log("total bet is " + betScript.playerBetValue + betScript.aiBetValue);
+            Debug.Log("player bet = " + betScript.playerBetValue + ". " +
+                "ai bet is" + betScript.aiBetValue + ". total bet is " + (betScript.playerBetValue + betScript.aiBetValue));
             
             string randomAIChoice = choices[Random.Range(0, choices.Length)];
             switch (randomAIChoice)
@@ -59,18 +66,18 @@ public class RockPaperScissorsController : MonoBehaviour
                     switch (myChoice)
                     {
                         case "Rock":
-                        Debug.Log("case 1");
+                            //Debug.Log("case 1");
                             result.text = "You LOST!";
                             betScript.aiCardCount = betScript.aiCardCount + betScript.aiBetValue + betScript.playerBetValue;
                             break;
                         case "Paper":
-                        Debug.Log("case 2");
+                            //Debug.Log("case 2");
                             result.text = "TIE!";
                             betScript.playerCardCount += betScript.playerBetValue;
                             betScript.aiCardCount += betScript.aiBetValue;
                             break;
                         case "Scissors":
-                        Debug.Log("case 3");
+                            //Debug.Log("case 3");
                             result.text = "You WIN!";
                             betScript.playerCardCount = betScript.playerCardCount + betScript.playerBetValue + betScript.aiBetValue;
                             break;
@@ -97,6 +104,7 @@ public class RockPaperScissorsController : MonoBehaviour
                     break;
             }
             betScript.betFlag = false;
+            recalculateCardLeft();
             betScript.cardsRemainingTextupdate();
             checkEndGame();
         }
@@ -111,17 +119,16 @@ public class RockPaperScissorsController : MonoBehaviour
     {
         if(betScript.playerCardCount <= 0)
         {
+            youLost.SetActive(true);
             Debug.Log("You Lose");
         }
         else if(betScript.aiCardCount <= 0)
         {
+            youWon.SetActive(true);
             Debug.Log("You Won!");
         }
     }
-    public TMP_Text getResult()
-    {
-        return result;
-    }
+    
 
     public void recalculateCardLeft()
     {
@@ -135,13 +142,13 @@ public class RockPaperScissorsController : MonoBehaviour
             betScript.aiCardCount += betScript.playerCardCount;
             aiCardLeft.text = betScript.aiCardCount.ToString();
         }
-        else
+        else if (result.text == "TIE!")
         {
             playerCardLeft.text = betScript.playerCardCount.ToString();
             aiCardLeft.text = betScript.aiCardCount.ToString();
         }
     }
-
+  
     public IEnumerator warningScreen()
     {
         placeBetWarning.SetActive(true);
