@@ -49,7 +49,7 @@ public class PegSolitaireController : MonoBehaviour
 
     public void makeUserChoicePair(int choice)
     {
-        // check if the chpice is already made. If it has, clear
+        // check if the choice is already made. If it has, clear
         if (userChoosedPair[0] != 0 && userChoosedPair[1] != 0)
         {
             userChoosedPair = new int[2];
