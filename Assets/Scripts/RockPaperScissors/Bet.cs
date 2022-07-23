@@ -34,7 +34,6 @@ public class Bet : MonoBehaviour
     
     public bool betFlag = false;
     private int defaultCard = 10;
-    private bool aiStopBet = false;
 
 
     public void setBet(float bet)
@@ -49,16 +48,16 @@ public class Bet : MonoBehaviour
     public void applyPlayerBet()
     {
         
-        if (betFlag == false && playerBetValue <= playerCardCount)
+        if (betFlag == false && playerBetValue <= playerCardCount && aiBetValue <= aiCardCount)
         {
             buttonInteraction.disableBetButton();
             playerCardCount -= playerBetValue;
             cardsRemainingTextupdate();
             betFlag = true;
+            applyAIBet();
         }
         else if (betFlag == false && playerBetValue > playerCardCount)
         {
-            aiStopBet = true;
             betFlag = false;
             betButton.interactable = true;
             buttonInteraction.enableBetButton();
@@ -76,21 +75,18 @@ public class Bet : MonoBehaviour
 
     public void applyAIBet()
     {
-        if (!aiStopBet)
+        if (aiCardCount < 5)
         {
-            if (aiCardCount < 5)
-            {
-                aiBetValue = Random.Range(1, aiCardCount);
-            }
-            else
-            {
-                aiBetValue = Random.Range(1, 5);
-            }
-            aiCardCount -= aiBetValue;
-
-            aiBetValueText.text = aiBetValue.ToString();
-            cardsRemainingTextupdate();
+            aiBetValue = Random.Range(1, aiCardCount);
         }
+        else
+        {
+            aiBetValue = Random.Range(1, 5);
+        }
+        aiCardCount -= aiBetValue;
+
+        aiBetValueText.text = aiBetValue.ToString();
+        cardsRemainingTextupdate();
     }
 
     public void resetBtn(string order)

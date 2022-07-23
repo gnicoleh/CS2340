@@ -104,7 +104,6 @@ public class RockPaperScissorsController : MonoBehaviour
                     break;
             }
             betScript.betFlag = false;
-            //recalculateCardLeft();
             betScript.cardsRemainingTextupdate();
             checkEndGame();
         }
@@ -126,26 +125,6 @@ public class RockPaperScissorsController : MonoBehaviour
         {
             youWon.SetActive(true);
             Debug.Log("You Won!");
-        }
-    }
-    
-
-    public void recalculateCardLeft()
-    {
-        if (result.text == "You WIN!")
-        {
-            betScript.playerCardCount += betScript.aiBetValue;
-            playerCardLeft.text = betScript.playerCardCount.ToString();
-        } 
-        else if (result.text == "You LOST!")
-        {
-            betScript.aiCardCount += betScript.playerCardCount;
-            aiCardLeft.text = betScript.aiCardCount.ToString();
-        }
-        else if (result.text == "TIE!")
-        {
-            playerCardLeft.text = betScript.playerCardCount.ToString();
-            aiCardLeft.text = betScript.aiCardCount.ToString();
         }
     }
   
