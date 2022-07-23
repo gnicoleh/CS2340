@@ -11,7 +11,7 @@ public class Bet : MonoBehaviour
     [SerializeField] private Slider betSlider = null;
     [SerializeField] private TMP_Text betTextValue = null;
     [SerializeField] private int defaultBet;
-    public int playerBetValue = 0;
+    public int playerBetValue = 3;
     public ButtonInteraction buttonInteraction;
 
     [Header("Player Cards Left")]
@@ -34,7 +34,7 @@ public class Bet : MonoBehaviour
     
     public bool betFlag = false;
     private int defaultCard = 10;
-    //private bool aiStopBet = false;
+    private bool aiStopBet = false;
 
 
     public void setBet(float bet)
@@ -51,13 +51,14 @@ public class Bet : MonoBehaviour
         
         if (betFlag == false && playerBetValue <= playerCardCount)
         {
+            buttonInteraction.disableBetButton();
             playerCardCount -= playerBetValue;
             cardsRemainingTextupdate();
             betFlag = true;
         }
-        else
+        else if (betFlag == false && playerBetValue > playerCardCount)
         {
-            //aiStopBet = true;
+            aiStopBet = true;
             betFlag = false;
             betButton.interactable = true;
             buttonInteraction.enableBetButton();
@@ -75,18 +76,21 @@ public class Bet : MonoBehaviour
 
     public void applyAIBet()
     {
-        if (aiCardCount < 5)
+        if (!aiStopBet)
         {
-            aiBetValue = Random.Range(1, aiCardCount);
-        }
-        else
-        {
-            aiBetValue = Random.Range(1, 5);
-        }
-        aiCardCount -= aiBetValue;
+            if (aiCardCount < 5)
+            {
+                aiBetValue = Random.Range(1, aiCardCount);
+            }
+            else
+            {
+                aiBetValue = Random.Range(1, 5);
+            }
+            aiCardCount -= aiBetValue;
 
-        aiBetValueText.text = aiBetValue.ToString();
-        cardsRemainingTextupdate();
+            aiBetValueText.text = aiBetValue.ToString();
+            cardsRemainingTextupdate();
+        }
     }
 
     public void resetBtn(string order)

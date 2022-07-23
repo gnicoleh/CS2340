@@ -104,7 +104,7 @@ public class RockPaperScissorsController : MonoBehaviour
                     break;
             }
             betScript.betFlag = false;
-            recalculateCardLeft();
+            //recalculateCardLeft();
             betScript.cardsRemainingTextupdate();
             checkEndGame();
         }
