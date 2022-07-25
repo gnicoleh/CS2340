@@ -48,7 +48,7 @@ public class Bet : MonoBehaviour
     public void applyPlayerBet()
     {
         
-        if (betFlag == false && playerBetValue <= playerCardCount)
+        if (betFlag == false && playerBetValue <= playerCardCount && aiBetValue <= aiCardCount)
         {
             buttonInteraction.disableBetButton();
             playerCardCount -= playerBetValue;
