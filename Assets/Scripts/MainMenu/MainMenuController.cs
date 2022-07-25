@@ -24,6 +24,7 @@ public class MainMenuController : MonoBehaviour
 
     void start()
     {
+        //AudioSource.Play();
         volumeCount = PlayerPrefs.GetFloat("masterVolume");
     }
     
@@ -33,7 +34,9 @@ public class MainMenuController : MonoBehaviour
     public void ExitButton()
     {
         Application.Quit();
-    }    
+    }
+
+    
     /**
      * This method is to control the audio volume level.
      * AudioListener changes every single audio in the game. AudioListener has a value
